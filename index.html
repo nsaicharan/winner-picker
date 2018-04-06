@@ -13,18 +13,18 @@
     <h1>WinnerPicker</h1>
 
     <div class="container" id="app">
-        <form>
-            <input type="text" class="input-name">
+        <form v-on:submit.prevent="addName">
+            <input type="text" class="input-name" placeholder="Enter a name.." v-model="inputName">
             <button type="submit" class="add">+</button>
         </form>
 
-        <ul>
+        <ol>
             <li v-for="item in list">{{item}}</li>
-        </ul>
+        </ol>
 
         <button class="pick-winner" @click="pickWinner">Pick-a-Winner</button>
 
-        <div class="winner">
+        <div>
             <p v-show="winner">Winner - {{winner}}</p>
         </div>
 

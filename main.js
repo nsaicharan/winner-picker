@@ -4,11 +4,16 @@ new Vue({
   el: "#app",
   data() {
     return {
-      list: ["Ram", "Naresh", "Geeta", "Sita"],
+      inputName: "",
+      list: [], //"Ram", "Naresh", "Geeta", "Sita"
       winner: ""
     };
   },
   methods: {
+    addName() {
+      this.list.push(this.inputName);
+      this.inputName = "";
+    },
     pickWinner() {
       const randNumber = Math.floor(Math.random() * this.list.length);
 
