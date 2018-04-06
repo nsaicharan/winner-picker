@@ -5,28 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Cookie|Open+Sans|Satisfy|Mate+SC" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
     <link rel="stylesheet" href="style.css">
-    <title>WinnerPicker</title>
+    <title>Winner Picker</title>
 </head>
 
 <body>
-    <h1>WinnerPicker</h1>
+    <h1>Winner Picker</h1>
 
     <div class="container" id="app">
         <form v-on:submit.prevent="addName">
-            <input type="text" class="input-name" placeholder="Enter a name.." v-model="inputName">
-            <button type="submit" class="add">+</button>
+            <input type="text" class="input-name" placeholder="Enter name.." v-model="inputName">
+            <button type="submit" class="btn-add">+</button>
         </form>
 
-        <ol>
-            <li v-for="item in list">{{item}}</li>
+        <ol v-show="list.length>0">
+            <transition-group name="list" enter-active-class="animated flipInX">
+                <li v-for="(item, i) in list" v-bind:key="i">{{item}}</li>
+            </transition-group>
         </ol>
 
-        <button class="pick-winner" @click="pickWinner">Pick-a-Winner</button>
+        <button class="btn-pick" v-show="list.length>0" @click="pickWinner">Pick a Winner</button>
 
-        <div>
-            <p v-show="winner">Winner - {{winner}}</p>
-        </div>
+        <transition name="winner-name" enter-active-class="animated fadeInDown">
+            <div class="winner-name" v-show="winner">
+                {{winner}}
+            </div>
+        </transition>
 
     </div>
 

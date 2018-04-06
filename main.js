@@ -11,8 +11,12 @@ new Vue({
   },
   methods: {
     addName() {
-      this.list.push(this.inputName);
-      this.inputName = "";
+      if (this.inputName.trim() != "") {
+        this.list.push(this.inputName);
+        this.inputName = "";
+      } else {
+        alert("Input field shouldn't be empty!");
+      }
     },
     pickWinner() {
       const randNumber = Math.floor(Math.random() * this.list.length);
