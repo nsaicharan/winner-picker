@@ -84,7 +84,7 @@ h1 {
 
 .input-name:focus,
 .btn-add:focus,
-.btn-pick {
+.btn-pick:focus {
   outline: 1px solid #a3b1ff;
 }
 
