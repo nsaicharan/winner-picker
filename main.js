@@ -4,25 +4,31 @@ new Vue({
   el: "#app",
   data() {
     return {
-      inputName: "",
-      list: [], //"Ram", "Naresh", "Geeta", "Sita"
+      names: "",
       winner: ""
     };
   },
   methods: {
-    addName() {
-      if (this.inputName.trim() != "") {
-        this.list.push(this.inputName);
-        this.inputName = "";
-      } else {
-        alert("Input field shouldn't be empty!");
-      }
+    handleChange() {
+      autosize(this.$refs.textarea);
     },
     pickWinner() {
-      const randNumber = Math.floor(Math.random() * this.list.length);
+      if (!this.names) {
+        alert(`You haven't entered any name!`);
+      } else {
+        const namesArray = this.names
+          .trim()
+          .split("\n")
+          .filter(name => name != "");
 
-      // Set Winner
-      this.winner = this.list[randNumber];
+        const randNumber = Math.floor(Math.random() * namesArray.length);
+
+        // Set Winner
+        this.winner = namesArray[randNumber];
+      }
     }
+  },
+  mounted() {
+    this.$refs.textarea.setAttribute('placeholder', `E.g.\nBrian\nCharles\nLara`);
   }
 });

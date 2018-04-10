@@ -5,28 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Cookie|Open+Sans|Satisfy|Mate+SC" rel="stylesheet">
+    <title>Winner Picker</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cookie|Open+Sans|Mate+SC" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
     <link rel="stylesheet" href="style.css">
-    <title>Winner Picker</title>
+
 </head>
 
 <body>
     <h1>Winner Picker</h1>
 
     <div class="container" id="app">
-        <form v-on:submit.prevent="addName">
-            <input type="text" class="input-name" placeholder="Enter name.." v-model="inputName">
-            <button type="submit" class="btn-add">+</button>
+        <form v-on:submit.prevent="splitNames">
+            <label for="names">Enter all names in the field below, each on a separate line:</label>
+            <textarea title="Enter names" id="names" ref="textarea" @input="handleChange" v-model="names"></textarea>
         </form>
 
-        <ol v-show="list.length>0">
-            <transition-group name="list" enter-active-class="animated flipInX">
-                <li v-for="(item, i) in list" v-bind:key="i">{{item}}</li>
-            </transition-group>
-        </ol>
-
-        <button class="btn-pick" v-show="list.length>0" @click="pickWinner">Pick a Winner</button>
+        <button class="btn-pick" @click="pickWinner">Pick a Winner</button>
 
         <transition name="winner-name" enter-active-class="animated fadeInDown">
             <div class="winner-name" v-show="winner">
@@ -36,7 +32,8 @@
 
     </div>
 
-    <script src="vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/autosize@4.0.1/dist/autosize.min.js"></script>
     <script src="main.js"></script>
 </body>
 
